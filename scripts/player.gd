@@ -8,13 +8,13 @@ enum PlayerNum {
 
 @export var player: PlayerNum = PlayerNum.ONE
 
-var key_combo: Array[GameManager.ComboColor]:
+var key_combo: Array[int]:
 	get:
 		return key_combo
 	set(value):
 		key_combo = value
 		if player == PlayerNum.ONE:
-			%Player1KeyComboValue.text = _stringify_key_combo_value(value)
+			%Player1KeyComboValue.text = _get_color_from_enum_int(value)
 
 
 func _ready() -> void:
@@ -23,15 +23,18 @@ func _ready() -> void:
 
 func reset_key_combo(combo_size: int) -> void:
 	key_combo.clear()
-	var c: Array[GameManager.ComboColor]
+	var c: Array[int]
 	for i in combo_size:
 		c.append(GameManager.ComboColor.BLACK)
 	key_combo = c
 
 
-func _stringify_key_combo_value(value: Array[GameManager.ComboColor]) -> String:
-	var s: String
-	for i in value:
-		s = s + " " + GameManager.ComboColor.keys()[value[i]]
+func _get_color_from_enum_int(value: Array[int]) -> String:
+	var parts: PackedStringArray
+	for color in value:
+		if color > GameManager.ComboColor.size() - 1:
+			parts.append("INVALID")
+			break
+		parts.append(GameManager.ComboColor.keys()[color])
 
-	return s
+	return " ".join(parts)
