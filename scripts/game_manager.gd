@@ -1,6 +1,8 @@
 class_name GameManager
 extends Node
 
+signal GameStart(combo_size: int)
+
 enum State {
 	PREGAME,
 	GAMESTART,
@@ -10,7 +12,9 @@ enum State {
 	P2TURN,
 	GAMEEND,
 }
+## black indicates empty, used mostly by player key_combo
 enum ComboColor {
+	BLACK,
 	RED,
 	GREEN,
 	BLUE,
@@ -40,9 +44,11 @@ func _ready() -> void:
 func start_game() -> void:
 	game_state = State.GAMESTART
 	set_combo()
+	emit_signal("GameStart", combo_size)
 
 
 func set_combo() -> void:
 	for i in combo_size:
-		combo.append(randi_range(0, 4))
+		## choose random values from ComboColor range excluding 0 (black means empty)
+		combo.append(randi_range(1, 5))
 		%ComboValue.text = %ComboValue.text + " " + ComboColor.keys()[combo[i]]
