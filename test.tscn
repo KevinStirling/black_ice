@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://fmu3swrrwv5k" path="res://scripts/game_manager.gd" id="1_37kl0"]
 [ext_resource type="Script" uid="uid://1xrcmhm3iqqp" path="res://scripts/player.gd" id="2_8uh7m"]
+[ext_resource type="Script" uid="uid://b0k1bwww7cga2" path="res://scripts/dice.gd" id="3_6uqi0"]
+[ext_resource type="Script" uid="uid://uo0r8k5wpkmg" path="res://scripts/end_turn_button.gd" id="3_ppyta"]
 
 [node name="Node2D" type="Node2D" unique_id=823096755]
 
@@ -51,5 +53,72 @@ offset_left = 152.0
 offset_right = 192.0
 offset_bottom = 23.0
 
-[node name="Player1" type="Node" parent="GameManager" unique_id=1113075092]
+[node name="Player2KeyComboLabel" type="Label" parent="GameManager/DebugLabel" unique_id=1318151717]
+offset_top = 68.0
+offset_right = 40.0
+offset_bottom = 91.0
+text = "Player2 KeyCombo"
+
+[node name="Player2KeyComboValue" type="Label" parent="GameManager/DebugLabel/Player2KeyComboLabel" unique_id=1426986086]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 151.0
+offset_right = 191.0
+offset_bottom = 23.0
+
+[node name="CurrentPlayerLabel" type="Label" parent="GameManager/DebugLabel" unique_id=127731786]
+offset_top = 90.0
+offset_right = 40.0
+offset_bottom = 113.0
+text = "CurrentPlayer"
+
+[node name="CurrentPlayerValue" type="Label" parent="GameManager/DebugLabel/CurrentPlayerLabel" unique_id=448245385]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 114.0
+offset_right = 154.0
+offset_bottom = 23.0
+
+[node name="CurrentRollLabel" type="Label" parent="GameManager/DebugLabel" unique_id=632024746]
+offset_top = 113.0
+offset_right = 94.0
+offset_bottom = 136.0
+text = "CurrentRoll"
+
+[node name="CurrentRollValue" type="Label" parent="GameManager/DebugLabel/CurrentRollLabel" unique_id=1517828456]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 97.0
+offset_right = 137.0
+offset_bottom = 23.0
+
+[node name="Player1" type="Node" parent="GameManager" unique_id=1113075092 node_paths=PackedStringArray("end_turn_button")]
 script = ExtResource("2_8uh7m")
+end_turn_button = NodePath("EndTurnButton")
+
+[node name="EndTurnButton" type="Button" parent="GameManager/Player1" unique_id=1393807317]
+offset_left = 5.0
+offset_top = 151.0
+offset_right = 83.0
+offset_bottom = 182.0
+text = "End Player 1 Turn"
+script = ExtResource("3_ppyta")
+
+[node name="Player2" type="Node" parent="GameManager" unique_id=1737283758 node_paths=PackedStringArray("end_turn_button")]
+script = ExtResource("2_8uh7m")
+player = 1
+is_cpu = true
+end_turn_button = NodePath("EndTurnButton")
+
+[node name="EndTurnButton" type="Button" parent="GameManager/Player2" unique_id=848406138]
+offset_left = 157.0
+offset_top = 152.0
+offset_right = 301.0
+offset_bottom = 183.0
+disabled = true
+text = "End Player 2 Turn"
+script = ExtResource("3_ppyta")
+
+[node name="Dice" type="Node" parent="GameManager" unique_id=2143775409]
+unique_name_in_owner = true
+script = ExtResource("3_6uqi0")
