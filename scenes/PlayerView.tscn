@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b8ygm6wuweksx"]
+
+[ext_resource type="Script" uid="uid://c8upmghuglt5i" path="res://scripts/player_view.gd" id="1_vtsk7"]
+
+[node name="PlayerView" type="Control" unique_id=2098282211]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_vtsk7")
+
+[node name="EndTurnButton" type="Button" parent="." unique_id=1533690008]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "E"
