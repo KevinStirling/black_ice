@@ -17,7 +17,7 @@ func _ready() -> void:
 	game_manager.phase_changed.connect(_on_phase_changed)
 	game_manager.turn_changed.connect(_on_turn_changed)
 	game_manager.combo_changed.connect(_on_combo_changed)
-	dice.rolled.connect(_on_rolled)
+	game_manager.roll_changed.connect(_on_rolled)
 	for i in game_manager.players.size():
 		game_manager.players[i].key_combo_changed.connect(
 			_on_player_combo_changed.bind(i),
@@ -29,7 +29,7 @@ func refresh() -> void:
 	_on_phase_changed(game_manager.phase)
 	_on_turn_changed(game_manager.players[game_manager.current_turn])
 	_on_combo_changed(game_manager.combo)
-	_on_rolled(dice.current_roll)
+	_on_rolled(game_manager.current_roll)
 	for i in game_manager.players.size():
 		_on_player_combo_changed(game_manager.players[i].key_combo, i)
 

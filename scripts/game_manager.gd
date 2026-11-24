@@ -4,6 +4,7 @@ extends Node
 signal phase_changed(phase: Phase)
 signal turn_changed(player: Player)
 signal combo_changed(combo: Array[int])
+signal roll_changed(roll: Array[int])
 
 enum Phase {
 	PREGAME,
@@ -39,7 +40,14 @@ var current_turn: int = 0:
 			return
 		current_turn = value
 		turn_changed.emit(players[value])
-var combo: Array[int] = []
+var combo: Array[int] = []:
+	set(value):
+		combo = value
+		combo_changed.emit(value)
+var current_roll: Array[int] = []:
+	set(value):
+		current_roll = value
+		roll_changed.emit(value)
 var _running: bool = false
 
 
@@ -78,14 +86,18 @@ func set_combo() -> void:
 	for i in combo_size:
 		# choose random values from ComboColor range excluding 0 (black means empty)
 		combo.append(randi_range(1, ComboColor.size() - 1))
-	combo_changed.emit(combo)
+
+
+func roll() -> void:
+	current_roll.clear()
+	current_roll = %Dice.roll()
 
 
 func _run_turn() -> void:
 	var p := players[current_turn]
 	p.is_active = true
 	phase = Phase.ROLL
-	p.roll()
+	roll()
 	phase = Phase.ACTION
 	await p.turn_finished
 	if not _running:

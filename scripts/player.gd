@@ -4,6 +4,8 @@ extends Node
 signal key_combo_changed(combo: Array[int])
 signal active_changed(is_active: bool)
 signal turn_finished
+## peek_activated emitted when peek turn is used, consumed by GameManager to show player color at index
+signal peek_activated(index: int)
 
 @export var display_name: String = "Player 1"
 @export var is_cpu: bool = false
@@ -28,10 +30,6 @@ func set_combo_slot(index: int, color: GameManager.ComboColor) -> void:
 		return
 	key_combo[index] = color
 	key_combo_changed.emit(key_combo)
-
-
-func roll() -> void:
-	%Dice.roll()
 
 
 func turn_end() -> void:

@@ -1,8 +1,6 @@
 class_name Dice
 extends Node
 
-signal rolled(faces: Array[int])
-
 enum Faces {
 	PEEK,
 	SWAP,
@@ -13,7 +11,6 @@ enum Faces {
 }
 
 var quantity: int = 3
-var current_roll: Array[int] = []
 
 
 static func format_faces(faces: Array[int]) -> String:
@@ -27,10 +24,9 @@ static func format_faces(faces: Array[int]) -> String:
 	return " ".join(parts)
 
 
-func roll() -> void:
+func roll() -> Array[int]:
 	var result: Array[int] = []
 	for i in quantity:
-		result.append(randi_range(0, Faces.size() - 1))
+		result.append(Faces.values().pick_random())
 
-	current_roll = result
-	rolled.emit(current_roll)
+	return result
