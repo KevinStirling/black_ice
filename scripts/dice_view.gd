@@ -22,5 +22,4 @@ func _ready() -> void:
 
 func _on_roll_changed(roll: Array[int]) -> void:
 	for i in _dice.size():
-		print("roll")
 		_dice[i].set_face(roll[i] if i < roll.size() else -1)
