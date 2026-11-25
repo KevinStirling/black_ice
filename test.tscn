@@ -4,15 +4,20 @@
 [ext_resource type="Script" uid="uid://1xrcmhm3iqqp" path="res://scripts/player.gd" id="2_8uh7m"]
 [ext_resource type="Script" uid="uid://b0k1bwww7cga2" path="res://scripts/dice.gd" id="3_6uqi0"]
 [ext_resource type="PackedScene" uid="uid://b8ygm6wuweksx" path="res://scenes/PlayerView.tscn" id="4_ykrsh"]
-[ext_resource type="Script" path="res://scripts/debug_view.gd" id="5_dbgvw"]
+[ext_resource type="Script" uid="uid://wvrd5u5pioem" path="res://scripts/debug_view.gd" id="5_dbgvw"]
+[ext_resource type="PackedScene" uid="uid://d2fbwo2mm11i3" path="res://scenes/ComboView.tscn" id="6_g14j6"]
+[ext_resource type="PackedScene" uid="uid://cjyy462sdev5q" path="res://scenes/ComboSlot.tscn" id="7_vbegm"]
+[ext_resource type="PackedScene" uid="uid://bjsfkce6xc4jy" path="res://scenes/DiceView.tscn" id="8_ehkex"]
+[ext_resource type="PackedScene" uid="uid://bv85nw3h1idkj" path="res://scenes/Die.tscn" id="9_xersf"]
 
 [node name="Node2D" type="Node2D" unique_id=823096755]
 
-[node name="GameManager" type="Node" parent="." unique_id=97041676 node_paths=PackedStringArray("players")]
+[node name="GameManager" type="Node" parent="." unique_id=97041676 node_paths=PackedStringArray("players", "dice")]
 unique_name_in_owner = true
 script = ExtResource("1_37kl0")
 debug = true
 players = [NodePath("Player1"), NodePath("Player2")]
+dice = NodePath("Dice")
 
 [node name="DebugLabel" type="Node2D" parent="GameManager" unique_id=1977153529 node_paths=PackedStringArray("game_manager", "dice")]
 unique_name_in_owner = true
@@ -97,26 +102,34 @@ offset_left = 97.0
 offset_right = 137.0
 offset_bottom = 23.0
 
-[node name="Player1" type="Node" parent="GameManager" unique_id=1113075092 node_paths=PackedStringArray("end_turn_button")]
+[node name="Dice" type="Node" parent="GameManager" unique_id=2143775409]
+unique_name_in_owner = true
+script = ExtResource("3_6uqi0")
+
+[node name="Player1" type="Node" parent="GameManager" unique_id=1113075092]
 script = ExtResource("2_8uh7m")
-end_turn_button = NodePath("")
 
 [node name="PlayerView" parent="GameManager/Player1" unique_id=2098282211 node_paths=PackedStringArray("player") instance=ExtResource("4_ykrsh")]
 offset_top = 142.0
 offset_bottom = 142.0
 player = NodePath("..")
 
-[node name="Player2" type="Node" parent="GameManager" unique_id=1737283758 node_paths=PackedStringArray("end_turn_button")]
+[node name="Player2" type="Node" parent="GameManager" unique_id=1737283758]
 script = ExtResource("2_8uh7m")
 display_name = "Player 2"
 is_cpu = true
-end_turn_button = NodePath("")
 
 [node name="PlayerView" parent="GameManager/Player2" unique_id=154700629 node_paths=PackedStringArray("player") instance=ExtResource("4_ykrsh")]
 offset_top = 179.0
 offset_bottom = 179.0
 player = NodePath("..")
 
-[node name="Dice" type="Node" parent="GameManager" unique_id=2143775409]
-unique_name_in_owner = true
-script = ExtResource("3_6uqi0")
+[node name="ComboView" parent="GameManager" unique_id=822303779 node_paths=PackedStringArray("game_manager") instance=ExtResource("6_g14j6")]
+position = Vector2(323, 204)
+game_manager = NodePath("..")
+slot_scene = ExtResource("7_vbegm")
+
+[node name="DiceView" parent="GameManager" unique_id=1776033335 node_paths=PackedStringArray("game_manager") instance=ExtResource("8_ehkex")]
+position = Vector2(234, 303)
+game_manager = NodePath("..")
+die_scene = ExtResource("9_xersf")

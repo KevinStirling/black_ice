@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d2fbwo2mm11i3"]
+
+[ext_resource type="Script" uid="uid://cy5i8ay2ob4ia" path="res://scripts/combo_view.gd" id="1_k8h7d"]
+
+[node name="ComboView" type="Node2D" unique_id=822303779]
+script = ExtResource("1_k8h7d")

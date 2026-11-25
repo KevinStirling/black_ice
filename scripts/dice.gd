@@ -10,7 +10,7 @@ enum Faces {
 	WILD,
 }
 
-var quantity: int = 3
+@export var quantity: int = 3
 
 
 static func format_faces(faces: Array[int]) -> String:

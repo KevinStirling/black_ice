@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://co4bkno3sqa6j"]
+
+[ext_resource type="Script" path="res://scripts/combo_piece.gd" id="1_k8h7d"]
+
+[node name="ComboPiece" type="Sprite2D" unique_id=279137695]
+script = ExtResource("1_k8h7d")

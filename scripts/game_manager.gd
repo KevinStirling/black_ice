@@ -27,6 +27,7 @@ enum ComboColor {
 @export var debug: bool = false
 @export var combo_size: int = 3
 @export var players: Array[Player] = []
+@export var dice: Dice
 
 var phase: Phase = Phase.PREGAME:
 	set(value):
@@ -82,15 +83,15 @@ func stop_game() -> void:
 
 
 func set_combo() -> void:
-	combo.clear()
+	var c: Array[int] = []
 	for i in combo_size:
 		# choose random values from ComboColor range excluding 0 (black means empty)
-		combo.append(randi_range(1, ComboColor.size() - 1))
+		c.append(randi_range(1, ComboColor.size() - 1))
+	combo = c
 
 
 func roll() -> void:
-	current_roll.clear()
-	current_roll = %Dice.roll()
+	current_roll = dice.roll()
 
 
 func _run_turn() -> void:
